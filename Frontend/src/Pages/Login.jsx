@@ -6,11 +6,12 @@ import { Link } from 'react-router-dom';
 export default function Login() {
   const [data, setData] = useState({ email: '', password: '' });
   const navigate = useNavigate();
+  const API_BASE_URL = 'http://localhost:5000' || process.env.REACT_APP_API_BASE_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', data);
+      const res = await axios.post(`${API_BASE_URL}/api/auth/login`, data);
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('user', JSON.stringify(res.data.user));
       navigate('/dashboard');
