@@ -5,7 +5,10 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "https://your-frontend.vercel.app", // or "*" for dev/test
+  credentials: true // only if you're using cookies/auth
+}));
 app.use(express.json());
 const auth = require('./middleware/authMiddleware');
 
